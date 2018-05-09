@@ -71,6 +71,23 @@ body {
 	margin-bottom: 25px;
 }
 
+.content {
+	padding: 50px;
+}
+
+.stange {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.kugel {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: #da3333;
+	border-radius: 15px;
+}
+
 /*
 *
 *
@@ -127,22 +144,7 @@ body {
 	font-weight: bold;
 }
 
-.content {
-	padding: 50px;
-}
 
-.stange {
-	margin-top: 25px;
-	margin-bottom: 25px;
-}
-
-.kugel {
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	background-color: #da3333;
-	border-radius: 15px;
-}
 
 
 
