@@ -62,7 +62,7 @@ body {
 
 .abakus {
 	width: 800px;
-	height: 500px;
+	
 	background-color: #fff;
 	margin-left: auto;
 	margin-right: auto;
@@ -126,3 +126,26 @@ body {
 	font-size: 26px;
 	font-weight: bold;
 }
+
+.content {
+	padding: 50px;
+}
+
+.stange {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.kugel {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: #da3333;
+	border-radius: 15px;
+}
+
+
+
+
+
+
