@@ -1,0 +1,150 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: #999;
+	font-family: Open Sans;
+}
+
+/*
+*
+*
+*/
+
+/* OBERE LEISTE - TITEL & AUSGABE */
+
+.anzeigeleiste {
+	width: 800px;
+	height: 80px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+
+}
+
+#ueberschrift {
+	height: 40px;
+	display: block;
+	background-color: #fff;
+	padding: 20px;
+	text-align: center;
+	float: left;
+}
+
+#ueberschrift > span {
+	color: #333;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+#anzeige {
+	width: 100px;
+	height: 40px;
+	display: block;
+	background-color: #fff;
+	padding: 20px;
+	text-align: center;
+	float: right;
+	color: #333;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+/*
+*
+*
+*/
+
+/* ABAKUS */
+
+.abakus {
+	width: 800px;
+
+	background-color: #fff;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.content {
+	padding: 50px;
+}
+
+.stange {
+
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.kugel {
+
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: #da3333;
+	border-radius: 15px;
+}
+
+.rechts {
+	transform: translateX(362px);
+	transition: transform 1s;
+}
+
+.links {
+	transition: transform 1s;
+}
+
+/*
+*
+*
+*/
+
+/* UNTERE LEISTE - RECHNEN */
+
+.rechenleiste {
+	width: 800px;
+	height: 80px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#ausgabe {
+	width: 100px;
+	height: 40px;
+	display: block;
+	background-color: #fff;
+	padding: 20px;
+	text-align: center;
+	float: left;
+	color: #333;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+#eingabefeld {
+	width: 160px;
+	height: 80px;
+	display: block;
+	padding: 20px;
+	text-align: center;
+	float: left;
+	padding: 0px;
+    border-width: 0px;
+    margin-left: 20px;
+    color: #333;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+#rechne {
+	float: right;
+	width: 160px;
+	height: 80px;
+	display: block;
+	color: #333;
+	font-size: 26px;
+	font-weight: bold;
+}
