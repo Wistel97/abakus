@@ -19,7 +19,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
-	
+
 }
 
 #ueberschrift {
@@ -62,7 +62,7 @@ body {
 
 .abakus {
 	width: 800px;
-	
+
 	background-color: #fff;
 	margin-left: auto;
 	margin-right: auto;
@@ -76,11 +76,13 @@ body {
 }
 
 .stange {
+
 	margin-top: 25px;
 	margin-bottom: 25px;
 }
 
 .kugel {
+	
 	display: inline-block;
 	width: 30px;
 	height: 30px;
@@ -143,11 +145,3 @@ body {
 	font-size: 26px;
 	font-weight: bold;
 }
-
-
-
-
-
-
-
-
