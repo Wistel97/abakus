@@ -17,9 +17,11 @@ $( document ).ready(function() {
         $(this).nextAll().removeClass("links").addClass("rechts");
       }
 
+        //rechnet die Reihen zusammen
         var ausgabe = 0;
         var ausgabe = $("#1stelle").children(".rechts").length + $("#2stelle").children(".rechts").length*10 + $("#3stelle").children(".rechts").length * 100 + $("#4stelle").children(".rechts").length *1000 + $("#5stelle").children(".rechts").length *10000;
 
+        //gibt das Ergebnis in die Felder ein
         $("#anzeige").text(ausgabe);
         $("#ausgabe").text(ausgabe);
 
