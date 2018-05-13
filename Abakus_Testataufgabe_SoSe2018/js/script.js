@@ -13,6 +13,30 @@ $( document ).ready(function() {
 
 });
 
+
+$( document ).ready(function() {
+
+    $( ".kugel" ).click(function( event ) {
+    	
+    	if ($(this).hasClass('rechts')) {
+    		// nach links..
+    	};
+    	
+    	$(this).addClass('rechts');
+        $(this).nextAll().addClass('rechts');
+        
+        // rechne(); -> Für die Anzeige oben rechts und unten links
+        
+    });
+    
+});
+
+
+
+ /*function count(){
+  * 
+  * 
+    
 $( document ).ready(function() {
 
     $( ".kugel" ).click(function( event ) {
@@ -22,9 +46,11 @@ $( document ).ready(function() {
     });
 
 });
+    
+    
+    
 
- /*function count(){
-
+});
 
    var stangen = $("#stangen").children().length;
    var ausgabe;

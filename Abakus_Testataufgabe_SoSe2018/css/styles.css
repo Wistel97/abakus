@@ -90,6 +90,11 @@ body {
 	border-radius: 15px;
 }
 
+.rechts {
+	transform: translateX(362px);
+	transition: transform 1s;
+}
+
 /*
 *
 *
