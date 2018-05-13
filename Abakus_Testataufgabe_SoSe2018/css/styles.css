@@ -45,9 +45,6 @@ body {
 	padding: 20px;
 	text-align: center;
 	float: right;
-}
-
-#anzeige > span {
 	color: #333;
 	font-size: 26px;
 	font-weight: bold;
@@ -122,9 +119,6 @@ body {
 	padding: 20px;
 	text-align: center;
 	float: left;
-}
-
-#ausgabe > span {
 	color: #333;
 	font-size: 26px;
 	font-weight: bold;
