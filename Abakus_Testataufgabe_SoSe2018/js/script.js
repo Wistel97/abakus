@@ -17,26 +17,34 @@ $( document ).ready(function() {
 $( document ).ready(function() {
 
     $( ".kugel" ).click(function( event ) {
-    	
-    	if ($(this).hasClass('rechts')) {
+
+    	if ($(this).hasClass("rechts")) {
+        $(this).removeClass("rechts").addClass("links");
+        $(this).prevAll().removeClass("rechts").addClass("links");
     		// nach links..
-    	};
-    	
-    	$(this).addClass('rechts');
-        $(this).nextAll().addClass('rechts');
-        
+    	}
+      else {
+        if ($(this).hasClass("links")) {
+          $(this).removeClass("links")
+        }
+        $(this).addClass("rechts");
+        $(this).nextAll().addClass("rechts");
+      }
+
+
+
         // rechne(); -> Für die Anzeige oben rechts und unten links
-        
+
     });
-    
+
 });
 
 
 
  /*function count(){
-  * 
-  * 
-    
+  *
+  *
+
 $( document ).ready(function() {
 
     $( ".kugel" ).click(function( event ) {
@@ -46,9 +54,9 @@ $( document ).ready(function() {
     });
 
 });
-    
-    
-    
+
+
+
 
 });
 

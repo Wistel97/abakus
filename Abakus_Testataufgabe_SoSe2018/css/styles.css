@@ -82,7 +82,7 @@ body {
 }
 
 .kugel {
-	
+
 	display: inline-block;
 	width: 30px;
 	height: 30px;
@@ -92,6 +92,10 @@ body {
 
 .rechts {
 	transform: translateX(362px);
+	transition: transform 1s;
+}
+
+.links {
 	transition: transform 1s;
 }
 
