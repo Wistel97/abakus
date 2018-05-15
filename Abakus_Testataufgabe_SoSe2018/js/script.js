@@ -4,6 +4,8 @@
 
 $( document ).ready(function() {
 
+
+
     $( ".kugel" ).click(function( event ) {
 
       //bewegt Kugeln beim KLicken nach Links
@@ -18,14 +20,21 @@ $( document ).ready(function() {
       }
 
         //rechnet die Reihen zusammen
-        var ausgabe = 0;
-        var ausgabe = $("#1stelle").children(".rechts").length + $("#2stelle").children(".rechts").length*10 + $("#3stelle").children(".rechts").length * 100 + $("#4stelle").children(".rechts").length *1000 + $("#5stelle").children(".rechts").length *10000;
+        var $ausgabe = 0;
+        var $ausgabe = $("#1stelle").children(".rechts").length + $("#2stelle").children(".rechts").length*10 + $("#3stelle").children(".rechts").length * 100 + $("#4stelle").children(".rechts").length *1000 + $("#5stelle").children(".rechts").length *10000;
 
         //gibt das Ergebnis in die Felder ein
-        $("#anzeige").text(ausgabe);
-        $("#ausgabe").text(ausgabe);
+        $("#anzeige").text($ausgabe);
+        $("#ausgabe").text($ausgabe);
 
 
+    });
+
+    $( "#rechne" ).click(function( event ) {
+      var $inhalt = $("#eingabefeld").val();
+      var $inhaltBereinigt = $inhalt.match(/(^\s*[\-\+]\s*\d+)$/);
+      var $vorzeichen = ($inhaltBereinigt).text();
+      alert($vorzeichen);
     });
 
 });
