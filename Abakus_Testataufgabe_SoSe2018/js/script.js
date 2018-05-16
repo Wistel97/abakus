@@ -4,9 +4,18 @@
 
 $( document ).ready(function() {
 
+    //AusgabeFeld
+    var $ausgabe;
+    //Inhalt TextFeld
+    var $inhalt;
+    //das Vorzeichen aus dem Textfeld
+    var $vorzeichen;
+    //die Zahl aus dem Textfeld
+    var $zahl;
 
 
-    $( ".kugel" ).click(function( event ) {
+
+    $( ".kugel" ).on( "click", function( event ) {
 
       //bewegt Kugeln beim KLicken nach Links
     	if ($(this).hasClass("rechts")) {
@@ -20,8 +29,8 @@ $( document ).ready(function() {
       }
 
         //rechnet die Reihen zusammen
-        var $ausgabe = 0;
-        var $ausgabe = $("#1stelle").children(".rechts").length + $("#2stelle").children(".rechts").length*10 + $("#3stelle").children(".rechts").length * 100 + $("#4stelle").children(".rechts").length *1000 + $("#5stelle").children(".rechts").length *10000;
+        $ausgabe = 0;
+        $ausgabe = $("#1stelle").children(".rechts").length + $("#2stelle").children(".rechts").length*10 + $("#3stelle").children(".rechts").length * 100 + $("#4stelle").children(".rechts").length *1000 + $("#5stelle").children(".rechts").length *10000;
 
         //gibt das Ergebnis in die Felder ein
         $("#anzeige").text($ausgabe);
@@ -30,11 +39,66 @@ $( document ).ready(function() {
 
     });
 
-    $( "#rechne" ).click(function( event ) {
-      var $inhalt = $("#eingabefeld").val();
-      var $inhaltBereinigt = $inhalt.match(/(^\s*[\-\+]\s*\d+)$/);
-      var $vorzeichen = ($inhaltBereinigt).text();
-      alert($vorzeichen);
-    });
+    $( "#rechne" ).on("click",function( event ) {
 
+      //Inhalt TextFeld
+      inhalt = $("#eingabefeld").val();
+      //das Vorzeichen aus dem Textfeld
+      $vorzeichen = $inhalt.match(/[\-\+]/);
+      //die Zahl aus dem Textfeld
+      $zahl = $inhalt.match(/\d+/);
+
+
+
+
+    });
+    //Textfeld nach Eingabe überprüfen
+    $( "#eingabefeld" ).on("change",function( event ) {
+
+      //Inhalt Textfeld
+      $inhalt = $("#eingabefeld").val();
+
+      //prüfen ob im Feld -/+ und eine Zahl und nichts anderes eingegeben wurde
+      if(!$inhalt.match(/(^\s*[\-\+]\s*\d+)$/)){
+        $( "#rechne" ).prop("disabled",true);
+        alert("Bitte geben sie eine gültige Eingabe ein!")
+      }
+        else{
+
+          //das Vorzeichen aus dem Textfeld
+          $vorzeichen = $inhalt.match(/[\-\+]/);
+          //die Zahl aus dem Textfeld
+          $zahl = $inhalt.match(/\d+/);
+
+          //alert($ausgabe);
+          //prüfen  bei negativer Zahl
+          if($vorzeichen == "-"){
+
+            //prüfen ob vorhandene Zahl - einggebne Zahl > 0 ist
+            if($ausgabe < $zahl){
+              $( "#rechne" ).prop("disabled",true);
+              alert("Das Ergebnis der Rechnung darf nicht < 0 sein!")
+            }
+
+            else if($ausgabe >= $zahl){
+              $( "#rechne" ).prop("disabled",false);
+            }
+          }
+          //prüfen bei positiver Zahl
+          else if($vorzeichen == "+"){
+
+            //prüfen ob die Rechnung über 100000 ergeben würde
+            if($ausgabe + $zahl >= 100000){
+              $( "#rechne" ).prop("disabled",true);
+              alert("Das Ergebnis darf den Wert 99999 nicht überschreiten!")
+            }
+
+            else if($ausgabe + $zahl < 100000){
+              $( "#rechne" ).prop("disabled",false);
+            }
+          }
+
+        }
+
+    });
 });
