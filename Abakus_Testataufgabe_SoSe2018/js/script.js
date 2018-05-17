@@ -5,7 +5,7 @@
 $( document ).ready(function() {
 
     //AusgabeFeld
-    var $ausgabe;
+    var $ausgabe = 0;
     //Inhalt TextFeld
     var $inhalt;
     //das Vorzeichen aus dem Textfeld
@@ -29,7 +29,6 @@ $( document ).ready(function() {
       }
 
         //rechnet die Reihen zusammen
-        $ausgabe = 0;
         $ausgabe = $("#1stelle").children(".rechts").length + $("#2stelle").children(".rechts").length*10 + $("#3stelle").children(".rechts").length * 100 + $("#4stelle").children(".rechts").length *1000 + $("#5stelle").children(".rechts").length *10000;
 
         //gibt das Ergebnis in die Felder ein
@@ -42,11 +41,14 @@ $( document ).ready(function() {
     $( "#rechne" ).on("click",function( event ) {
 
       //Inhalt TextFeld
-      inhalt = $("#eingabefeld").val();
+      $inhalt = $("#eingabefeld").val();
       //das Vorzeichen aus dem Textfeld
       $vorzeichen = $inhalt.match(/[\-\+]/);
       //die Zahl aus dem Textfeld
       $zahl = $inhalt.match(/\d+/);
+
+      //var $1stelle = zahl % 10;
+      //alert($1stelle);
 
 
 
@@ -63,14 +65,13 @@ $( document ).ready(function() {
         $( "#rechne" ).prop("disabled",true);
         alert("Bitte geben sie eine gültige Eingabe ein!")
       }
-        else{
+      else {
 
           //das Vorzeichen aus dem Textfeld
           $vorzeichen = $inhalt.match(/[\-\+]/);
           //die Zahl aus dem Textfeld
           $zahl = $inhalt.match(/\d+/);
 
-          //alert($ausgabe);
           //prüfen  bei negativer Zahl
           if($vorzeichen == "-"){
 
