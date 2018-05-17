@@ -47,10 +47,11 @@ $( document ).ready(function() {
       //die Zahl aus dem Textfeld
       $zahl = $inhalt.match(/\d+/);
 
-      //var $1stelle = zahl % 10;
-      //alert($1stelle);
-
-
+      var $1stelle = $zahl % 10;
+      var $2stelle = ($zahl % 100 - $zahl % 10) / 10;
+      var $3stelle = ($zahl % 1000 - $zahl % 100) / 100;
+      var $4stelle = ($zahl % 10000 - $zahl % 1000) / 1000;
+      var $5stelle = ($zahl % 100000 - $zahl % 10000) / 10000;
 
 
     });
