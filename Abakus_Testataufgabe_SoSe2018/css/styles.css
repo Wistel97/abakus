@@ -86,7 +86,9 @@ body {
 	background-color: #da3333;
 	border-radius: 15px;
 }
+.last {
 
+}
 .rechts {
 	transform: translateX(362px);
 	transition: transform 1s;
