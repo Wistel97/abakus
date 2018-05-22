@@ -89,7 +89,7 @@ body {
 .last {
 
 }
-.rechts {
+.rechts {  
 	transform: translateX(362px);
 	transition: transform 1s;
 }

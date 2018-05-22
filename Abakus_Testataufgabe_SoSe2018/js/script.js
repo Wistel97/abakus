@@ -74,42 +74,46 @@ $( document ).ready(function() {
 
       var stellenAusgabe = [$1stelleAusgabe,$2stelleAusgabe,$3stelleAusgabe,$4stelleAusgabe,$5stelleAusgabe];
 
+      //var $1stelleSchieben,$2stelleAusgabe,$3stelleAusgabe,$4stelleAusgabe,$5stelleAusgabe =  0;
+
+      ///var $1stellenSchieben
+
       //Prüfen ob Vorzeichen positiver
       if($vorzeichen == "+"){
+
+
+
+
         // Schleife zum addieren der Vorhandenen Zahl mit der eingegebenen ++ Überprüfung der darüberliegenden Stangen nicht notwendig, da höchsten immer nur eine Kugel weitergegeben wird
         for(j = 0; j < $("#stangen").children().length; j++){
 
           //zählerHilfe für den Dezimalumbruch
-          var zählerHilfe = stellenAusgabe[j] + stellen[j];
+          var zählerHilfe = stellenAusgabe[j];
 
           //Schleife zum addieren einer Reihe/Stelle
-          for(i = 0; i < zählerHilfe; i++)  {
-
-
+          for(i = 0; i < stellen[j]; i++)  {
+            alert(zählerHilfe + i);
             //Bedingung wenn ein Dezimalumbruch auftritt
-            if(i > 9)  {
-              zählerHilfe = zählerHilfe - i;
-              i = 0;
+
+            var h = zählerHilfe + i;
+
+
+            if(zählerHilfe + i >= 9)  {
+
+              stellen[j+1]++;
+              //Bedingung das alle Kugeln nach Links geschoben werden, wenn die Zehnerstelle erreicht ist
+              $("#" + j + "stelle").children(".kugel").removeClass("rechts").addClass("links");
+
+              zählerHilfe = -i-1;
             }
 
             //Bedingung das eine linke Kugel pro Zähler nach Rechts verschoben wird
-            //if ($("#" + j + "stelle").children("#" + i).hasClass("links")) {
-            if ($("#" + j + "stelle").children("#" + i).hasClass("links")) {
+            else  {
 
-              $("#" + j + "stelle").children("#" + i).removeClass("links").addClass("rechts");
-
-            }
-
-            //Bedingung das alle Kugeln nach Links geschoben werden, wenn die Zehnerstelle erreicht ist
-            if($("#" + j + "stelle").children("#" + 9).hasClass("rechts")){
-              $("#" + j + "stelle").children(".kugel").removeClass("rechts").addClass("links");
-
-              k = j+1;
-
-              //Eine Kugel von der oberen Reihe wird nach Rechts verschoben
-              $("#" + k + "stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
+              $("#" + j + "stelle").children("#" + h).removeClass("links").addClass("rechts");
 
             }
+
           }
           //Zwischenergebnis in Anzeige anzeigen
           $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
