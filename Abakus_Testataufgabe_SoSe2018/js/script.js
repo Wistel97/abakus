@@ -92,19 +92,22 @@ $( document ).ready(function() {
 
           //Schleife zum addieren einer Reihe/Stelle
           for(i = 0; i < stellen[j]; i++)  {
-            alert(zählerHilfe + i);
+
             //Bedingung wenn ein Dezimalumbruch auftritt
 
             var h = zählerHilfe + i;
 
 
-            if(zählerHilfe + i >= 9)  {
+            if(h >= 9)  {
 
               stellen[j+1]++;
               //Bedingung das alle Kugeln nach Links geschoben werden, wenn die Zehnerstelle erreicht ist
+
               $("#" + j + "stelle").children(".kugel").removeClass("rechts").addClass("links");
 
+
               zählerHilfe = -i-1;
+
             }
 
             //Bedingung das eine linke Kugel pro Zähler nach Rechts verschoben wird
@@ -130,42 +133,30 @@ $( document ).ready(function() {
       for(j = 0; j < $("#stangen").children().length; j++){
 
         //zählerHilfe für den Dezimalumbruch
-        var zählerHilfe =  stellenAusgabe[j] - stellen[j];
+        var zählerHilfe = stellenAusgabe[j];
 
         //Schleife zum subtrahieren einer Reihe/Stelle
-        for(i = stellenAusgabe[j]-1; i > zählerHilfe-1; i--)  {
+        for(i = 0; i < stellen[j]; i++)  {
 
-          if($ausgabe < $zahl){
-            $( "#rechne" ).prop("disabled",true);
-            alert("Das Ergebnis der Rechnung darf nicht < 0 sein!")
-            return false
+        var h = zählerHilfe - i -1;
+alert(h);
+          if(h < 0)  {
+
+            stellen[j+1]++;
+            //Bedingung das alle Kugeln nach Rechts geschoben werden, wenn die Zehnerstelle erreicht ist
+            $("#" + j + "stelle").children(".kugel").removeClass("links").addClass("rechts");
+
+            zählerHilfe = 11 + i ;
           }
 
 
-          //Bedingung wenn ein Dezimalumbruch auftritt
-          /*if(zählerHilfe == 0)  {
-            zählerHilfe =  stellenAusgabe[j]-1;
-          }*/
+          //Bedingung das eine Rechte Kugel pro Zähler nach Links verschoben wird
+          else  {
 
-          //Bedingung das eine rechte Kugel pro Zähler nach Links verschoben wird
-          if ($("#" + j + "stelle").children("#" + i).hasClass("rechts")) {
-
-            $("#" + j + "stelle").children("#" + i).removeClass("rechts").addClass("links");
+            $("#" + j + "stelle").children("#" + h).removeClass("rechts").addClass("links");
 
           }
 
-
-          //Bedingung (das alle Kugeln nach Rechts geschoben werden), wenn die Zehnerstelle vorhanden ist
-            if($("#" + j + "stelle").children("#" + 0).hasClass("links")){
-              $("#" + j + "stelle").children(".kugel").removeClass("links").addClass("rechts");
-              $("#" + j + "stelle").children("#" + 9).removeClass("rechts").addClass("links");
-
-              k = j+1;
-
-              //Eine Kugel von der oberen Reihe wird nach Links verschoben
-              $("#" + k + "stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
-
-            }
           }
 
         //Zwischenergebnis in Anzeige anzeigen
