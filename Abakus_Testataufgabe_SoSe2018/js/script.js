@@ -17,28 +17,38 @@ $( document ).ready(function() {
 
     $( ".kugel" ).on( "click", function( event ) {
 
-      //bewegt Kugeln beim KLicken nach Links
-    	if ($(this).hasClass("rechts")) {
-        $(this).removeClass("rechts").addClass("links");
-        $(this).prevAll().removeClass("rechts").addClass("links");
-    	}
-      //bewegt Kugeln beim KLicken nach Rechts
-      else if ($(this).hasClass("links")) {
-        $(this).removeClass("links").addClass("rechts");
-        $(this).nextAll().removeClass("links").addClass("rechts");
-      }
+      $(this).animate({
+        opacity: 1,
+      }, 1000, function() {
 
-        //rechnet die Reihen zusammen
-        $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+        //bewegt Kugeln beim KLicken nach Links
+      	if ($(this).hasClass("rechts")) {
+          $(this).removeClass("rechts").addClass("links");
+          $(this).prevAll().removeClass("rechts").addClass("links");
+      	}
 
-        //gibt das Ergebnis in die Felder ein
-        $("#anzeige").text($ausgabe);
-        $("#ausgabe").text($ausgabe);
+        //bewegt Kugeln beim KLicken nach Rechts
+        else if ($(this).hasClass("links")) {
+          $(this).removeClass("links").addClass("rechts");
+          $(this).nextAll().removeClass("links").addClass("rechts");
+        }
 
+          //rechnet die Reihen zusammen
+          $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+
+          //gibt das Ergebnis in die Felder ein
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
+      });
 
     });
 
     $( "#rechne" ).on("click",function( event ) {
+
+      $(this).animate({
+        opacity: 1,
+      }, 1000, function() {
+
 
       //Inhalt TextFeld
       $inhalt = $("#eingabefeld").val();
@@ -153,7 +163,7 @@ $( document ).ready(function() {
 
             }
           }
-        
+
         //Zwischenergebnis in Anzeige anzeigen
         $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
         $("#anzeige").text($ausgabe);
@@ -212,6 +222,8 @@ $( document ).ready(function() {
           }
 
         }
+
+          });
 
     });
 });
