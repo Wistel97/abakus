@@ -139,13 +139,12 @@ $( document ).ready(function() {
         for(i = 0; i < stellen[j]; i++)  {
 
         var h = zählerHilfe - i -1;
-alert(h);
           if(h < 0)  {
 
             stellen[j+1]++;
             //Bedingung das alle Kugeln nach Rechts geschoben werden, wenn die Zehnerstelle erreicht ist
             $("#" + j + "stelle").children(".kugel").removeClass("links").addClass("rechts");
-
+            i--;
             zählerHilfe = 11 + i ;
           }
 
