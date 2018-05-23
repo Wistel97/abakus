@@ -13,8 +13,6 @@ $( document ).ready(function() {
     //die Zahl aus dem Textfeld
     var $zahl;
 
-
-
     $( ".kugel" ).on( "click", function( event ) {
 
       $(this).animate({
@@ -102,7 +100,6 @@ $( document ).ready(function() {
 
               stellen[j+1]++;
               //Bedingung das alle Kugeln nach Links geschoben werden, wenn die Zehnerstelle erreicht ist
-
               $("#" + j + "stelle").children(".kugel").removeClass("rechts").addClass("links");
 
 
@@ -112,9 +109,7 @@ $( document ).ready(function() {
 
             //Bedingung das eine linke Kugel pro Zähler nach Rechts verschoben wird
             else  {
-
               $("#" + j + "stelle").children("#" + h).removeClass("links").addClass("rechts");
-
             }
 
           }
@@ -168,7 +163,7 @@ $( document ).ready(function() {
   }
 
     });
-
+});
 
     //Textfeld nach Eingabe überprüfen
     $( "#eingabefeld" ).on("change",function( event ) {
@@ -216,8 +211,6 @@ $( document ).ready(function() {
           }
 
         }
-
-          });
 
     });
 });
