@@ -89,10 +89,12 @@ $( document ).ready(function() {
       
       if ($vorzeichen == "+") {
     	  
-    	  
+      einer();  
     	  
     	  
     	  // EINER ZU ZEHNER //
+    	  function einer() {
+    	  
     	  var zahl = $1stelle;
     	  
     	  for (var i = 0; i < 10; i++) {
@@ -126,16 +128,211 @@ $( document ).ready(function() {
 					  $("#0stelle").children("#" + i).removeClass("links").addClass("rechts");
 					  
 				  }
+	    		  
+	    		  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+	              $("#anzeige").text($ausgabe);
+	              $("#ausgabe").text($ausgabe);
 				  
 			  }
     	  }, 4000);
     	  
-    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
-          $("#anzeige").text($ausgabe);
-          $("#ausgabe").text($ausgabe);
+    	  setTimeout(function(){
+    		  zehner();
+    	  }, 6000);
+    	  
+    	  }
           // EINER ZU ZEHNER //
+    	  
+    	  
+    	  
+    	  // ZEHNER ZU HUNDERTER //
+    	  function zehner() {
+    	  
+    	  var zahl = $2stelle;
+    	  
+    	  for (var i = 0; i < 10; i++) {
+
+			  if ($("#1stelle").children("#" + i).hasClass("links") && zahl > 0) {
+				  
+				  $("#1stelle").children("#" + i).removeClass("links").addClass("rechts");
+				  zahl = zahl - 1;
+						  
+			  }
+			
+			  if ($("#1stelle").children("#9").hasClass("rechts")) {
+
+				  setTimeout(function(){
+					  $("#1stelle").children(".kugel").removeClass("rechts").addClass("links");
+				  }, 2000);
+				  
+				  setTimeout(function(){
+					  $("#2stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
+				  }, 3000);
+
+			  }
+			  
+    	  }
+    	  
+    	  setTimeout(function(){
+	    	  for (var i = 0; i < zahl; i++) {
+	    		  
+	    		  if ($("#1stelle").children("#" + i).hasClass("links")) {
+					  
+					  $("#1stelle").children("#" + i).removeClass("links").addClass("rechts");
+					  
+				  }
+	    		  
+	    		  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+	              $("#anzeige").text($ausgabe);
+	              $("#ausgabe").text($ausgabe);
+				  
+			  }
+    	  }, 4000);
+    	  
+    	  setTimeout(function(){
+    		  hunderter();
+    	  }, 6000);
+    	  
+    	  }
+          // ZEHNER ZU HUNDERTER //
+    	  
+    	  
+    	  
+    	  // HUNDERTER ZU TAUSENDER //
+    	  function hunderter() {
+    	  
+    	  var zahl = $3stelle;
+    	  
+    	  for (var i = 0; i < 10; i++) {
+
+			  if ($("#2stelle").children("#" + i).hasClass("links") && zahl > 0) {
+				  
+				  $("#2stelle").children("#" + i).removeClass("links").addClass("rechts");
+				  zahl = zahl - 1;
+						  
+			  }
+			
+			  if ($("#2stelle").children("#9").hasClass("rechts")) {
+
+				  setTimeout(function(){
+					  $("#2stelle").children(".kugel").removeClass("rechts").addClass("links");
+				  }, 2000);
+				  
+				  setTimeout(function(){
+					  $("#3stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
+				  }, 3000);
+
+			  }
+			  
+    	  }
+    	  
+    	  setTimeout(function(){
+	    	  for (var i = 0; i < zahl; i++) {
+	    		  
+	    		  if ($("#2stelle").children("#" + i).hasClass("links")) {
+					  
+					  $("#2stelle").children("#" + i).removeClass("links").addClass("rechts");
+					  
+				  }
+	    		  
+	    		  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+	              $("#anzeige").text($ausgabe);
+	              $("#ausgabe").text($ausgabe);
+				  
+			  }
+    	  }, 4000);
+    	  
+    	  setTimeout(function(){
+    		  tausender();
+    	  }, 6000);
+    		  
+    	  }
+          // HUNDERTER ZU TAUSENDER //
+    	  
+    	  
+    	  
+    	  // TAUSENDER ZU ZEHNTAUSENDER //
+    	  function tausender() {
+    	  
+    	  var zahl = $4stelle;
+    	  
+    	  for (var i = 0; i < 10; i++) {
+
+			  if ($("#3stelle").children("#" + i).hasClass("links") && zahl > 0) {
+				  
+				  $("#3stelle").children("#" + i).removeClass("links").addClass("rechts");
+				  zahl = zahl - 1;
+						  
+			  }
+			
+			  if ($("#3stelle").children("#9").hasClass("rechts")) {
+
+				  setTimeout(function(){
+					  $("#3stelle").children(".kugel").removeClass("rechts").addClass("links");
+				  }, 2000);
+				  
+				  setTimeout(function(){
+					  $("#4stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
+				  }, 3000);
+
+			  }
+			  
+    	  }
+    	  
+    	  setTimeout(function(){
+	    	  for (var i = 0; i < zahl; i++) {
+	    		  
+	    		  if ($("#3stelle").children("#" + i).hasClass("links")) {
+					  
+					  $("#3stelle").children("#" + i).removeClass("links").addClass("rechts");
+					  
+				  }
+	    		  
+	    		  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+	              $("#anzeige").text($ausgabe);
+	              $("#ausgabe").text($ausgabe);
+				  
+			  }
+    	  }, 4000);
+    	  
+    	  setTimeout(function(){
+    		  zehntausender();
+    	  }, 6000);
+    	  
+    	  }
+          // TAUSENDER ZU ZEHNTAUSENDER //
+    	  
+    	  
+    	  
+    	  // ZEHNTAUSENDER //
+    	  function zehntausender() {
+    	  
+    	  var zahl = $5stelle;
+    	  
+    	  for (var i = 0; i < 10; i++) {
+
+			  if ($("#4stelle").children("#" + i).hasClass("links") && zahl > 0) {
+				  
+				  $("#4stelle").children("#" + i).removeClass("links").addClass("rechts");
+				  zahl = zahl - 1;
+						  
+			  }
+			  
+    	  }
+    	  
+    	  ausgabe();
+    	  
+    	  }
+          // ZEHNTAUSENDER //
+    	  
           
+    	  function ausgabe() {
+    	  
+	    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+	          $("#anzeige").text($ausgabe);
+	          $("#ausgabe").text($ausgabe);
           
+    	  }
           
 
        }
