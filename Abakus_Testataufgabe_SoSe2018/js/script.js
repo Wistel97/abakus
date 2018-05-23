@@ -20,26 +20,37 @@ $( document ).ready(function() {
       }, 1000, function() {
 
 
-
         //bewegt Kugeln beim KLicken nach Links
       	if ($(this).hasClass("rechts")) {
           $(this).removeClass("rechts").addClass("links");
           $(this).prevAll().removeClass("rechts").addClass("links");
       	}
-
         //bewegt Kugeln beim KLicken nach Rechts
         else if ($(this).hasClass("links")) {
           $(this).removeClass("links").addClass("rechts");
           $(this).nextAll().removeClass("links").addClass("rechts");
 
-          if($(this).parents().children("#9").hasClass("rechts")){
-            $(this).parents().children().removeClass("rechts").addClass("links");
-            $(this).parents().prev().children(".links").last().removeClass("links").addClass("rechts");
+          if($(this).parent().children("#9").hasClass("rechts")){
+            $(this).parent().children().removeClass("rechts").addClass("links");
+            $(this).parent().prev().children(".links").last().removeClass("links").addClass("rechts");
 
 
           }
 
+          if($(this).parent().prev().children("#9").hasClass("rechts")){
+            $(this).parent().prev().children().removeClass("rechts").addClass("links");
+            $(this).parent().prev().prev().children(".links").last().removeClass("links").addClass("rechts");
+          }
 
+          if($(this).parent().prev().prev().children("#9").hasClass("rechts")){
+            $(this).parent().prev().prev().children().removeClass("rechts").addClass("links");
+            $(this).parent().prev().prev().prev().children(".links").last().removeClass("links").addClass("rechts");
+          }
+
+          if($(this).parent().prev().prev().prev().children("#9").hasClass("rechts")){
+            $(this).parent().prev().prev().prev().children().removeClass("rechts").addClass("links");
+            $(this).parent().prev().prev().prev().prev().children(".links").last().removeClass("links").addClass("rechts");
+          }
         }
 
 
