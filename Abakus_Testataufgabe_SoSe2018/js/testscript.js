@@ -2,8 +2,6 @@
  * http://usejsdoc.org/
  */
 
-
-
 $( document ).ready(function() {
 
     //AusgabeFeld
@@ -78,40 +76,42 @@ $( document ).ready(function() {
       var $5stelle = ($zahl % 100000 - $zahl % 10000) / 10000;
 
       var stellen = [$1stelle,$2stelle,$3stelle,$4stelle,$5stelle];
-
-      var $1stelleAusgabe =  $ausgabe % 10;
-      var $2stelleAusgabe = ($ausgabe % 100 - $ausgabe % 10) / 10;
-      var $3stelleAusgabe = ($ausgabe % 1000 - $ausgabe % 100) / 100;
-      var $4stelleAusgabe = ($ausgabe % 10000 - $ausgabe % 1000) / 1000;
-      var $5stelleAusgabe = ($ausgabe % 100000 - $ausgabe % 10000) / 10000;
-
-      var stellenAusgabe = [$1stelleAusgabe,$2stelleAusgabe,$3stelleAusgabe,$4stelleAusgabe,$5stelleAusgabe];
+      
+      
+      // ADDITION //
       
       if ($vorzeichen == "+") {
     	  
       einer();  
     	  
-    	  
     	  // EINER ZU ZEHNER //
     	  function einer() {
     	  
+    	  // Zahl (hier Einerstelle) wird festgelegt
     	  var zahl = $1stelle;
     	  
+    	  // Jede Kugel wird in dieser Schleife einmal überprüft
     	  for (var i = 0; i < 10; i++) {
 
+    		  // Wenn die Kugel an der Stelle #i die Klasse links hat und die Zahl > 0 ist...
 			  if ($("#0stelle").children("#" + i).hasClass("links") && zahl > 0) {
 				  
+				  // ...dann wird diese Zahl nach rechts geschoben
 				  $("#0stelle").children("#" + i).removeClass("links").addClass("rechts");
+				  // Zähler wird dekrementiert (kommt später zum Einsatz)
 				  zahl = zahl - 1;
 						  
 			  }
-			
+			  
+			  // Wenn die Kugel ganz links in der Reihe auf der rechten Seite ist...
 			  if ($("#0stelle").children("#9").hasClass("rechts")) {
 
+				  // ...dann schiebe alle Kugeln dieser Reihe mit einem Timeout von 2 Sek. nach links...
 				  setTimeout(function(){
 					  $("#0stelle").children(".kugel").removeClass("rechts").addClass("links");
 				  }, 2000);
 				  
+				  // ...und schiebe eine Reihe darüber die letzte Kugel mit der Klasse links, nach rechts
 				  setTimeout(function(){
 					  $("#1stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 3000);
@@ -120,22 +120,29 @@ $( document ).ready(function() {
 			  
     	  }
     	  
+    	  // Hier kommt der Zähler zum Einsatz
     	  setTimeout(function(){
+    		  
+    		  // Solange der Wert von i kleiner als der Wert der übrig gebliebenen Zahl ist...
 	    	  for (var i = 0; i < zahl; i++) {
 	    		  
+	    		  //...schiebe Kugeln von der linken Seite nach rechts (alle Kugeln werden mit Timeout von 4 Sek (also 1 Sek nach letzten Verschiebung) verschoben)
 	    		  if ($("#0stelle").children("#" + i).hasClass("links")) {
 					  
 					  $("#0stelle").children("#" + i).removeClass("links").addClass("rechts");
 					  
 				  }
-	    		  
-	    		  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
-	              $("#anzeige").text($ausgabe);
-	              $("#ausgabe").text($ausgabe);
-				  
+
 			  }
     	  }, 4000);
     	  
+    	  
+    	  // Nach jeder Stangenanimation wird das derzeitige Ergebnis ausgegeben
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);         
+    	     
+          // Gehe zur nächsten Stange
     	  setTimeout(function(){
     		  zehner();
     	  }, 6000);
@@ -149,6 +156,18 @@ $( document ).ready(function() {
     	  function zehner() {
     	  
     	  var zahl = $2stelle;
+    	  
+    	  // AUSNAHMEBEHANDLUNG //
+    	  if ($("#1stelle").children("#9").hasClass("rechts")) {
+    		  
+			  $("#1stelle").children(".kugel").removeClass("rechts").addClass("links");
+
+	    	  setTimeout(function(){
+	    		  $("#2stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
+	    	  }, 2000);
+    	  
+    	  }
+    	  // AUSNAHMEBEHANDLUNG //
     	  
     	  for (var i = 0; i < 10; i++) {
 
@@ -181,13 +200,13 @@ $( document ).ready(function() {
 					  $("#1stelle").children("#" + i).removeClass("links").addClass("rechts");
 					  
 				  }
-	    		  
-	    		  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
-	              $("#anzeige").text($ausgabe);
-	              $("#ausgabe").text($ausgabe);
-				  
+
 			  }
     	  }, 4000);
+    	  
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
     	  
     	  setTimeout(function(){
     		  hunderter();
@@ -202,6 +221,18 @@ $( document ).ready(function() {
     	  function hunderter() {
     	  
     	  var zahl = $3stelle;
+    	  
+    	  // AUSNAHMEBEHANDLUNG //
+    	  if ($("#2stelle").children("#9").hasClass("rechts")) {
+    		  
+			  $("#2stelle").children(".kugel").removeClass("rechts").addClass("links");
+
+	    	  setTimeout(function(){
+	    		  $("#3stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
+	    	  }, 2000);
+    	  
+    	  }
+    	  // AUSNAHMEBEHANDLUNG //
     	  
     	  for (var i = 0; i < 10; i++) {
 
@@ -234,13 +265,13 @@ $( document ).ready(function() {
 					  $("#2stelle").children("#" + i).removeClass("links").addClass("rechts");
 					  
 				  }
-	    		  
-	    		  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
-	              $("#anzeige").text($ausgabe);
-	              $("#ausgabe").text($ausgabe);
-				  
+  
 			  }
     	  }, 4000);
+    	  
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
     	  
     	  setTimeout(function(){
     		  tausender();
@@ -255,6 +286,18 @@ $( document ).ready(function() {
     	  function tausender() {
     	  
     	  var zahl = $4stelle;
+    	  
+    	  // AUSNAHMEBEHANDLUNG //
+    	  if ($("#3stelle").children("#9").hasClass("rechts")) {
+    		  
+			  $("#3stelle").children(".kugel").removeClass("rechts").addClass("links");
+
+	    	  setTimeout(function(){
+	    		  $("#4stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
+	    	  }, 2000);
+    	  
+    	  }
+    	  // AUSNAHMEBEHANDLUNG //
     	  
     	  for (var i = 0; i < 10; i++) {
 
@@ -287,13 +330,13 @@ $( document ).ready(function() {
 					  $("#3stelle").children("#" + i).removeClass("links").addClass("rechts");
 					  
 				  }
-	    		  
-	    		  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
-	              $("#anzeige").text($ausgabe);
-	              $("#ausgabe").text($ausgabe);
-				  
+
 			  }
     	  }, 4000);
+    	  
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
     	  
     	  setTimeout(function(){
     		  zehntausender();
@@ -320,75 +363,264 @@ $( document ).ready(function() {
 			  
     	  }
     	  
-    	  ausgabe();
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
     	  
-    	  }
-          // ZEHNTAUSENDER //
-    	  
-          
-    	  function ausgabe() {
-    	  
-	    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
-	          $("#anzeige").text($ausgabe);
-	          $("#ausgabe").text($ausgabe);
-          
-    	  }
-          
+          // ZEHNTAUSENDER //         
 
-       }
-
+    	  }
+      }
       
       
-      //Prüfen ob Vorzeichen negativ  -  (SUBTRAKTION)
+      
+      
+      // SUBTRAKTION //
+      
       else if($vorzeichen == "-"){
-	      // Schleife zum subtrahieren der Vorhandenen Zahl mit der eingegebenen ++ Überprüfung der darüberliegenden Stangen nicht notwendig, da höchsten immer nur eine Kugel weitergegeben wird
-	      for(j = 0; j < $("#stangen").children().length; j++){
-	
-	        //zählerHilfe für den Dezimalumbruch
-	        var zählerHilfe =  stellenAusgabe[j] - stellen[j];
-	
-	        //Schleife zum subtrahieren einer Reihe/Stelle
-	        for(i = stellenAusgabe[j]-1; i > zählerHilfe-1; i--)  {
-	
-	          if($ausgabe < $zahl){
-	            $( "#rechne" ).prop("disabled",true);
-	            alert("Das Ergebnis der Rechnung darf nicht < 0 sein!")
-	            return false
-	          }
-	
-	          //Bedingung das eine rechte Kugel pro Zähler nach Links verschoben wird
-	          if ($("#" + j + "stelle").children("#" + i).hasClass("rechts")) {
-	
-	            $("#" + j + "stelle").children("#" + i).removeClass("rechts").addClass("links");
-	
-	          }
-	
-	
-	          //Bedingung (das alle Kugeln nach Rechts geschoben werden), wenn die Zehnerstelle vorhanden ist
-	            if($("#" + j + "stelle").children("#" + 0).hasClass("links")){
-	              $("#" + j + "stelle").children(".kugel").removeClass("links").addClass("rechts");
-	              $("#" + j + "stelle").children("#" + 9).removeClass("rechts").addClass("links");
-	
-	              k = j+1;
-	
-	              //Eine Kugel von der oberen Reihe wird nach Links verschoben
-	              $("#" + k + "stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
-	
-	            }
-	          }
-	        
-	        //Zwischenergebnis in Anzeige anzeigen
-	        $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
-	        $("#anzeige").text($ausgabe);
-	        
-	      }
+    	  
+      einer();	  
+    	  
+    	  // EINER ZU ZEHNER //
+	  	  function einer() {
+    	  	  
+    	  var zahl = $1stelle;
+    	  
+    	  for (var i = 9; i >= 0; i--) {
 
-      //Endergebnis in Ausgabe Anzeigen
-      $("#ausgabe").text($ausgabe);
+			  if ($("#0stelle").children("#" + i).hasClass("rechts") && zahl > 0) {
+				  
+				  $("#0stelle").children("#" + i).removeClass("rechts").addClass("links");
+				  zahl = zahl - 1;
+						  
+			  }
+
+			  if ($("#0stelle").children("#0").hasClass("links")) {
+
+				  setTimeout(function(){
+					  $("#0stelle").children(".kugel").removeClass("links").addClass("rechts");
+				  }, 2000);
+				  
+				  setTimeout(function(){
+					  $("#1stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
+				  }, 3000);
+
+			  }
+	  
+    	  }
+
+    	  setTimeout(function(){
+	    	  for (var i = 9; zahl > 0; i--) {
+	    		  
+	    		  if ($("#0stelle").children("#" + i).hasClass("rechts")) {
+					  
+					  $("#0stelle").children("#" + i).removeClass("rechts").addClass("links");
+					  zahl = zahl - 1;
+					  
+				  }
+	    		  
+			  }
+    	  }, 4000);
+    	  
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
+    	  
+    	  setTimeout(function(){
+    		  zehner();
+    	  }, 6000);
+    	  
+    	  }
+          // EINER ZU ZEHNER //
+	  	  
+	  	  
+	  	  
+	  	  // ZEHNER ZU HUNDERTER //
+	  	  function zehner() {
+    	  
+    	  var zahl = $2stelle;
+    	  
+    	  for (var i = 9; i >= 0; i--) {
+
+			  if ($("#1stelle").children("#" + i).hasClass("rechts") && zahl > 0) {
+				  
+				  $("#1stelle").children("#" + i).removeClass("rechts").addClass("links");
+				  zahl = zahl - 1;
+						  
+			  }
+			  
+			  if ($("#1stelle").children("#0").hasClass("links") && zahl > 0) {
+
+				  setTimeout(function(){
+					  $("#1stelle").children(".kugel").removeClass("links").addClass("rechts");
+				  }, 2000);
+				  
+				  setTimeout(function(){
+					  $("#2stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
+				  }, 3000);
+
+			  }
+  
+    	  }
+
+    	  setTimeout(function(){
+	    	  for (var i = 9; zahl > 0; i--) {
+	    		  
+	    		  if ($("#1stelle").children("#" + i).hasClass("rechts")) {
+					  
+					  $("#1stelle").children("#" + i).removeClass("rechts").addClass("links");
+					  zahl = zahl - 1;
+					  
+				  }
+			  }
+    	  }, 4000);
+    	  
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
+
+    	  setTimeout(function(){
+    		  hunderter();
+    	  }, 6000);
+    	  
+    	  }
+	  	  // ZEHNER ZU HUNDERTER //
+	  	  
+	  	  
+	  	  
+	  	  // HUNDERTER ZU TAUSENDER //
+	  	  function hunderter() {
+    	  
+    	  var zahl = $3stelle;
+    	  
+    	  for (var i = 9; i >= 0; i--) {
+
+			  if ($("#2stelle").children("#" + i).hasClass("rechts") && zahl > 0) {
+				  
+				  $("#2stelle").children("#" + i).removeClass("rechts").addClass("links");
+				  zahl = zahl - 1;
+						  
+			  }
+  
+			  if ($("#2stelle").children("#0").hasClass("links") && zahl > 0) {
+
+				  setTimeout(function(){
+					  $("#2stelle").children(".kugel").removeClass("links").addClass("rechts");
+				  }, 2000);
+				  
+				  setTimeout(function(){
+					  $("#3stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
+				  }, 3000);
+
+			  }
+	  
+    	  }
+
+    	  setTimeout(function(){
+	    	  for (var i = 9; zahl > 0; i--) {
+	    		  
+	    		  if ($("#2stelle").children("#" + i).hasClass("rechts")) {
+					  
+					  $("#2stelle").children("#" + i).removeClass("rechts").addClass("links");
+					  zahl = zahl - 1;
+					  
+				  }
+			  }
+    	  }, 4000);
+    	  
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
+
+    	  setTimeout(function(){
+    		  tausender();
+    	  }, 6000);
+    	  
+    	  }
+	  	  // HUNDERTER ZU TAUSENDER //
+	  	  
+	  	  
+	  	  
+	  	  // TAUSENDER ZU ZEHNTAUSENDER //
+	  	  function tausender() {
+    	  
+    	  var zahl = $4stelle;
+    	  
+    	  for (var i = 9; i >= 0; i--) {
+
+			  if ($("#3stelle").children("#" + i).hasClass("rechts") && zahl > 0) {
+				  
+				  $("#3stelle").children("#" + i).removeClass("rechts").addClass("links");
+				  zahl = zahl - 1;
+						  
+			  }
+	  
+			  if ($("#3stelle").children("#0").hasClass("links") && zahl > 0) {
+
+				  setTimeout(function(){
+					  $("#3stelle").children(".kugel").removeClass("links").addClass("rechts");
+				  }, 2000);
+				  
+				  setTimeout(function(){
+					  $("#4stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
+				  }, 3000);
+
+			  }
+		  
+    	  }
+
+    	  setTimeout(function(){
+	    	  for (var i = 9; zahl > 0; i--) {
+	    		  
+	    		  if ($("#3stelle").children("#" + i).hasClass("rechts")) {
+					  
+					  $("#3stelle").children("#" + i).removeClass("rechts").addClass("links");
+					  zahl = zahl - 1;
+					  
+				  }
+			  }
+    	  }, 4000);
+    	  
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
+
+    	  setTimeout(function(){
+    		  zehntausender();
+    	  }, 6000);
+    	  
+    	  }
+	  	  // TAUSENDER ZU ZEHNTAUSENDER //
+	  	  
+	  	  
+	  	  
+	  	  // ZEHNTAUSENDER //
+	  	  function zehntausender() {
+    	  
+    	  var zahl = $5stelle;
+    	  
+    	  for (var i = 9; i >= 0; i--) {
+
+			  if ($("#3stelle").children("#" + i).hasClass("rechts") && zahl > 0) {
+				  
+				  $("#3stelle").children("#" + i).removeClass("rechts").addClass("links");
+				  zahl = zahl - 1;
+						  
+			  }
+	  
+    	  }
+    	  
+    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
+          $("#anzeige").text($ausgabe);
+          $("#ausgabe").text($ausgabe);
+    	  
+    	  }
+	  	  // ZEHNTAUSENDER //
       
       }
       
     });
+        
     
     
     
