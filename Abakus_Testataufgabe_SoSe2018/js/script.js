@@ -12,7 +12,7 @@ $( document ).ready(function() {
     var $vorzeichen;
     //die Zahl aus dem Textfeld
     var $zahl;
-    
+
     // Frage jede 1/2 Sekunde nach dem Ergebnis.
     setInterval(function(){
 	    $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
@@ -50,61 +50,61 @@ $( document ).ready(function() {
 	        }
 
         });
-    	
-    	
+
+
 
     	// AUSNHAME EINERSTELLE
     	setTimeout(function(){
-    		
+
 	    	if ($("#0stelle").children("#9").hasClass("rechts")) {
 
 				  $("#0stelle").children(".kugel").removeClass("rechts").addClass("links");
-				  
+
 				  setTimeout(function(){
 					  $("#1stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 1000);
 	    	}
     	}, 2000);
-    	
-    	
-    	
+
+
+
     	// AUSNHAME ZEHNERSTELLE
     	setTimeout(function(){
 
 	    	if ($("#1stelle").children("#9").hasClass("rechts")) {
 
 				  $("#1stelle").children(".kugel").removeClass("rechts").addClass("links");
-				  
+
 				  setTimeout(function(){
 					  $("#2stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 1000);
 	    	}
     	}, 4000);
-    	
-    	
-    	
+
+
+
     	// AUSNHAME HUNDERTERSTELLE
     	setTimeout(function(){
 
 	    	if ($("#2stelle").children("#9").hasClass("rechts")) {
 
 				  $("#2stelle").children(".kugel").removeClass("rechts").addClass("links");
-				  
+
 				  setTimeout(function(){
 					  $("#3stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 1000);
 	    	}
     	}, 6000);
-    	
-    	
-    	
+
+
+
     	// AUSNHAME TAUSENDERSTELLE
     	setTimeout(function(){
 
 	    	if ($("#3stelle").children("#9").hasClass("rechts")) {
 
 				  $("#3stelle").children(".kugel").removeClass("rechts").addClass("links");
-				  
+
 				  setTimeout(function(){
 					  $("#4stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 1000);
@@ -112,7 +112,7 @@ $( document ).ready(function() {
     	}, 8000);
 
     });
-    
+
     // ENDE - MANUELLE BEDIENUNG //
 
 
@@ -429,39 +429,39 @@ $( document ).ready(function() {
       // START - SUBTRAKTION //
 
       else if($vorzeichen == "-"){
-    	  
+
     	  // START - ERGEBNIS IST NULL //
 	      if($ausgabe == $zahl){
 
 	          setTimeout(function(){
 				  $("#0stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 1000);
-	          
+
 	          setTimeout(function(){
 				  $("#1stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 2000);
-	          
+
 	          setTimeout(function(){
 				  $("#2stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 3000);
-	          
+
 	          setTimeout(function(){
 				  $("#3stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 4000);
-	          
+
 	          setTimeout(function(){
 				  $("#4stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 5000);
-	              
+
 	      } else {
 
-	    	  einer(); 
-	    	  
+	    	  einer();
+
 	      }
 	      // ENDE - ERGEBNIS IST NULL //
-	      
-	      
-	      
+
+
+
 
     	  // START - EINER ZU ZEHNER //
 	  	  function einer() {
@@ -479,13 +479,18 @@ $( document ).ready(function() {
 
 			  if ($("#0stelle").children("#0").hasClass("links") && ($2stelleAusgabe + $3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe !=0)) {
 
+          if($2stelleAusgabe != 0){
 				  setTimeout(function(){
 					  $("#0stelle").children(".kugel").removeClass("links").addClass("rechts");
 				  }, 2000);
+        }
+
+
 
 				  setTimeout(function(){
 					  $("#1stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
 				  }, 3000);
+
 
 			  }
 
@@ -529,9 +534,11 @@ $( document ).ready(function() {
 
 			  if ($("#1stelle").children("#0").hasClass("links") && ($3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe != 0)) {
 
+          if($3stelleAusgabe != 0){
 				  setTimeout(function(){
 					  $("#1stelle").children(".kugel").removeClass("links").addClass("rechts");
 				  }, 2000);
+          }
 
 				  setTimeout(function(){
 					  $("#2stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
@@ -584,9 +591,11 @@ $( document ).ready(function() {
 
 			  if ($("#2stelle").children("#0").hasClass("links") && ( $4stelleAusgabe + $5stelleAusgabe !=0)) {
 
+          if($4stelleAusgabe != 0){
 				  setTimeout(function(){
 					  $("#2stelle").children(".kugel").removeClass("links").addClass("rechts");
 				  }, 2000);
+          }
 
 				  setTimeout(function(){
 					  $("#3stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
@@ -639,9 +648,11 @@ $( document ).ready(function() {
 
 			  if ($("#3stelle").children("#0").hasClass("links") && ($5stelleAusgabe !=0)) {
 
+          if($5stelleAusgabe != 0){
 				  setTimeout(function(){
 					  $("#3stelle").children(".kugel").removeClass("links").addClass("rechts");
 				  }, 2000);
+          }
 
 				  setTimeout(function(){
 					  $("#4stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
@@ -701,7 +712,7 @@ $( document ).ready(function() {
       // ENDE - SUBTRAKTION //
 
     });
-    
+
     // ENDE - ADDITION UND SUBTRAKTION //
 
 
@@ -731,8 +742,8 @@ $( document ).ready(function() {
 
           //prüfen  bei negativer Zahl
           if($vorzeichen == "-"){
-        	  
-        	  
+
+
 
             //prüfen ob vorhandene Zahl - einggebne Zahl > 0 ist
             if($ausgabe < $zahl){
@@ -766,7 +777,7 @@ $( document ).ready(function() {
         }
 
     });
-    
+
     // ENDE - EINGABE PRÜFEN / AUSNAHMEBEHANDLUNG //
 
 });

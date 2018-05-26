@@ -403,7 +403,7 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#0stelle").children("#0").hasClass("links") && ($3stelleAusgabe + $3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe !=0)) {
+			  if ($("#0stelle").children("#0").hasClass("links") && ($2stelleAusgabe + $3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe !=0)) {
 
 				  setTimeout(function(){
 					  $("#0stelle").children(".kugel").removeClass("links").addClass("rechts");
