@@ -477,7 +477,7 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#0stelle").children("#0").hasClass("links") && ($2stelleAusgabe + $3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe !=0)) {
+			  if ($("#0stelle").children("#0").hasClass("links") && ($2stelleAusgabe + $3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe !=0) && $1stelleAusgabe !=0) {
 
           if($2stelleAusgabe != 0){
 				  setTimeout(function(){
@@ -532,7 +532,7 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#1stelle").children("#0").hasClass("links") && ($3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe != 0)) {
+			  if ($("#1stelle").children("#0").hasClass("links") && ($3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe != 0) && $2stelleAusgabe !=0) {
 
           if($3stelleAusgabe != 0){
 				  setTimeout(function(){
@@ -589,7 +589,7 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#2stelle").children("#0").hasClass("links") && ( $4stelleAusgabe + $5stelleAusgabe !=0)) {
+			  if ($("#2stelle").children("#0").hasClass("links") && ( $4stelleAusgabe + $5stelleAusgabe !=0) && $3stelleAusgabe !=0) {
 
           if($4stelleAusgabe != 0){
 				  setTimeout(function(){
@@ -646,7 +646,7 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#3stelle").children("#0").hasClass("links") && ($5stelleAusgabe !=0)) {
+			  if ($("#3stelle").children("#0").hasClass("links") && ($5stelleAusgabe !=0) && $4stelleAusgabe !=0) {
 
           if($5stelleAusgabe != 0){
 				  setTimeout(function(){
@@ -696,9 +696,9 @@ $( document ).ready(function() {
 
     	  for (var i = 9; i >= 0; i--) {
 
-			  if ($("#3stelle").children("#" + i).hasClass("rechts") && zahl > 0) {
+			  if ($("#4stelle").children("#" + i).hasClass("rechts") && zahl > 0) {
 
-				  $("#3stelle").children("#" + i).removeClass("rechts").addClass("links");
+				  $("#4stelle").children("#" + i).removeClass("rechts").addClass("links");
 				  zahl = zahl - 1;
 
 			  }
