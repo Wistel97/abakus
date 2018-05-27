@@ -12,12 +12,14 @@ $( document ).ready(function() {
     var $vorzeichen;
     //die Zahl aus dem Textfeld
     var $zahl;
-
+    
     // Frage jede 1/2 Sekunde nach dem Ergebnis.
     setInterval(function(){
+    	
 	    $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
 	    $("#anzeige").text($ausgabe);
 	    $("#ausgabe").text($ausgabe);
+	    
     }, 500);
 
     // START - MANUELLE BEDIENUNG //
@@ -50,61 +52,61 @@ $( document ).ready(function() {
 	        }
 
         });
-
-
+    	
+    	
 
     	// AUSNHAME EINERSTELLE
     	setTimeout(function(){
-
+    		
 	    	if ($("#0stelle").children("#9").hasClass("rechts")) {
 
 				  $("#0stelle").children(".kugel").removeClass("rechts").addClass("links");
-
+				  
 				  setTimeout(function(){
 					  $("#1stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 1000);
 	    	}
     	}, 2000);
-
-
-
+    	
+    	
+    	
     	// AUSNHAME ZEHNERSTELLE
     	setTimeout(function(){
 
 	    	if ($("#1stelle").children("#9").hasClass("rechts")) {
 
 				  $("#1stelle").children(".kugel").removeClass("rechts").addClass("links");
-
+				  
 				  setTimeout(function(){
 					  $("#2stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 1000);
 	    	}
     	}, 4000);
-
-
-
+    	
+    	
+    	
     	// AUSNHAME HUNDERTERSTELLE
     	setTimeout(function(){
 
 	    	if ($("#2stelle").children("#9").hasClass("rechts")) {
 
 				  $("#2stelle").children(".kugel").removeClass("rechts").addClass("links");
-
+				  
 				  setTimeout(function(){
 					  $("#3stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 1000);
 	    	}
     	}, 6000);
-
-
-
+    	
+    	
+    	
     	// AUSNHAME TAUSENDERSTELLE
     	setTimeout(function(){
 
 	    	if ($("#3stelle").children("#9").hasClass("rechts")) {
 
 				  $("#3stelle").children(".kugel").removeClass("rechts").addClass("links");
-
+				  
 				  setTimeout(function(){
 					  $("#4stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 				  }, 1000);
@@ -112,7 +114,7 @@ $( document ).ready(function() {
     	}, 8000);
 
     });
-
+    
     // ENDE - MANUELLE BEDIENUNG //
 
 
@@ -145,6 +147,9 @@ $( document ).ready(function() {
       var $5stelleAusgabe = ($ausgabe % 100000 - $ausgabe % 10000) / 10000;
 
       var stellenAusgabe = [$1stelleAusgabe,$2stelleAusgabe,$3stelleAusgabe,$4stelleAusgabe,$5stelleAusgabe];
+      
+      
+      $("#eingabefeld").val('');
 
 
       // START - ADDITION //
@@ -221,15 +226,20 @@ $( document ).ready(function() {
     	  var zahl = $2stelle;
 
     	  // AUSNAHMEBEHANDLUNG //
+    	  
+    	  // Wenn schon alle Kugeln rechts sind...
     	  if ($("#1stelle").children("#9").hasClass("rechts")) {
-
+    		  
+    		  // ...dann schiebe erst alle nach links...
 			  $("#1stelle").children(".kugel").removeClass("rechts").addClass("links");
 
+			  // ...dann mit Timeout von zwei Sek eine Reihe drüber eine nach rechts
 	    	  setTimeout(function(){
 	    		  $("#2stelle").children(".kugel.links").last().removeClass("links").addClass("rechts");
 	    	  }, 2000);
 
     	  }
+    	  // Erst dann kann die aktuelle Stange berechnet werden
     	  // AUSNAHMEBEHANDLUNG //
 
     	  for (var i = 0; i < 10; i++) {
@@ -414,10 +424,6 @@ $( document ).ready(function() {
 
     	  }
 
-    	  $ausgabe = $("#0stelle").children(".rechts").length + $("#1stelle").children(".rechts").length * 10 + $("#2stelle").children(".rechts").length * 100 + $("#3stelle").children(".rechts").length * 1000 + $("#4stelle").children(".rechts").length * 10000;
-          $("#anzeige").text($ausgabe);
-          $("#ausgabe").text($ausgabe);
-
           // ENDE - ZEHNTAUSENDER //
 
     	  }
@@ -429,44 +435,54 @@ $( document ).ready(function() {
       // START - SUBTRAKTION //
 
       else if($vorzeichen == "-"){
-
+    	  
     	  // START - ERGEBNIS IST NULL //
 	      if($ausgabe == $zahl){
 
 	          setTimeout(function(){
 				  $("#0stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 1000);
-
+	          
 	          setTimeout(function(){
 				  $("#1stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 2000);
-
+	          
 	          setTimeout(function(){
 				  $("#2stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 3000);
-
+	          
 	          setTimeout(function(){
 				  $("#3stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 4000);
-
+	          
 	          setTimeout(function(){
 				  $("#4stelle").children(".kugel.rechts").removeClass("rechts").addClass("links");
 			  }, 5000);
-
+	              
 	      } else {
 
-	    	  einer();
-
+	    	  einer(); 
+	    	  
 	      }
 	      // ENDE - ERGEBNIS IST NULL //
-
-
-
+	      
+	      
+	      
 
     	  // START - EINER ZU ZEHNER //
 	  	  function einer() {
 
     	  var zahl = $1stelle;
+    	  
+    	  if ($1stelleAusgabe == zahl && zahl != 0) {
+
+    		  $("#0stelle").children(".kugel").removeClass("rechts").addClass("links");
+    		  
+			  setTimeout(function(){
+				  zehner();
+			  }, 2000);
+			  
+		  } else {
 
     	  for (var i = 9; i >= 0; i--) {
 
@@ -477,20 +493,15 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#0stelle").children("#0").hasClass("links") && ($2stelleAusgabe + $3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe !=0) && $1stelleAusgabe !=0) {
+			  if ($("#0stelle").children("#0").hasClass("links") && ($2stelleAusgabe + $3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe !=0)) {
 
-          if($2stelleAusgabe != 0){
 				  setTimeout(function(){
 					  $("#0stelle").children(".kugel").removeClass("links").addClass("rechts");
 				  }, 2000);
-        }
-
-
 
 				  setTimeout(function(){
 					  $("#1stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
 				  }, 3000);
-
 
 			  }
 
@@ -508,10 +519,12 @@ $( document ).ready(function() {
 
 			  }
     	  }, 4000);
-
+    	  
     	  setTimeout(function(){
     		  zehner();
-    	  }, 6000);
+    	  }, 8000);
+    	  
+		  }
 
     	  }
           // ENDE - EINER ZU ZEHNER //
@@ -522,6 +535,16 @@ $( document ).ready(function() {
 	  	  function zehner() {
 
     	  var zahl = $2stelle;
+    	  
+    	  if ($2stelleAusgabe == zahl && zahl != 0) {
+
+    		  $("#1stelle").children(".kugel").removeClass("rechts").addClass("links");
+    		  
+			  setTimeout(function(){
+				  hunderter();
+			  }, 2000);
+			  
+		  } else {
 
     	  for (var i = 9; i >= 0; i--) {
 
@@ -532,22 +555,22 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#1stelle").children("#0").hasClass("links") && ($3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe != 0) && $2stelleAusgabe !=0) {
+			  if ($("#1stelle").children("#0").hasClass("links") && ($3stelleAusgabe + $4stelleAusgabe + $5stelleAusgabe != 0)) {
 
-          if($3stelleAusgabe != 0){
 				  setTimeout(function(){
 					  $("#1stelle").children(".kugel").removeClass("links").addClass("rechts");
 				  }, 2000);
-          }
 
 				  setTimeout(function(){
 					  $("#2stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
 				  }, 3000);
 
 		          if($1stelleAusgabe == 0){
+		        	  
 			          setTimeout(function(){
 			        	  $("#1stelle").children("#9").removeClass("rechts").addClass("links");
 			          }, 4000);
+			          
 		          }
 
 			  }
@@ -569,6 +592,8 @@ $( document ).ready(function() {
     	  setTimeout(function(){
     		  hunderter();
     	  }, 7000);
+    	  
+		  }
 
     	  }
 	  	  // ENDE - ZEHNER ZU HUNDERTER //
@@ -579,6 +604,16 @@ $( document ).ready(function() {
 	  	  function hunderter() {
 
     	  var zahl = $3stelle;
+    	  
+    	  if ($3stelleAusgabe == zahl && zahl != 0) {
+
+    		  $("#2stelle").children(".kugel").removeClass("rechts").addClass("links");
+    		  
+			  setTimeout(function(){
+				  tausender();
+			  }, 2000);
+			  
+		  } else {
 
     	  for (var i = 9; i >= 0; i--) {
 
@@ -589,22 +624,22 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#2stelle").children("#0").hasClass("links") && ( $4stelleAusgabe + $5stelleAusgabe !=0) && $3stelleAusgabe !=0) {
+			  if ($("#2stelle").children("#0").hasClass("links") && ( $4stelleAusgabe + $5stelleAusgabe !=0)) {
 
-          if($4stelleAusgabe != 0){
 				  setTimeout(function(){
 					  $("#2stelle").children(".kugel").removeClass("links").addClass("rechts");
 				  }, 2000);
-          }
 
 				  setTimeout(function(){
 					  $("#3stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
 				  }, 3000);
 
 		          if($2stelleAusgabe == 0){
+		        	  
 			          setTimeout(function(){
 			        	  $("#2stelle").children("#9").removeClass("rechts").addClass("links");
 			          }, 4000);
+			          
 		          }
 
 			  }
@@ -626,6 +661,8 @@ $( document ).ready(function() {
     	  setTimeout(function(){
     		  tausender();
     	  }, 7000);
+    	  
+		  }
 
     	  }
 	  	  // ENDE - HUNDERTER ZU TAUSENDER //
@@ -636,6 +673,16 @@ $( document ).ready(function() {
 	  	  function tausender() {
 
     	  var zahl = $4stelle;
+    	  
+    	  if ($4stelleAusgabe == zahl && zahl != 0) {
+
+    		  $("#3stelle").children(".kugel").removeClass("rechts").addClass("links");
+    		  
+			  setTimeout(function(){
+				  zehntausender();
+			  }, 2000);
+			  
+		  } else {
 
     	  for (var i = 9; i >= 0; i--) {
 
@@ -646,22 +693,22 @@ $( document ).ready(function() {
 
 			  }
 
-			  if ($("#3stelle").children("#0").hasClass("links") && ($5stelleAusgabe !=0) && $4stelleAusgabe !=0) {
+			  if ($("#3stelle").children("#0").hasClass("links") && ($5stelleAusgabe !=0)) {
 
-          if($5stelleAusgabe != 0){
 				  setTimeout(function(){
 					  $("#3stelle").children(".kugel").removeClass("links").addClass("rechts");
 				  }, 2000);
-          }
 
 				  setTimeout(function(){
 					  $("#4stelle").children(".kugel.rechts").first().removeClass("rechts").addClass("links");
 				  }, 3000);
 
 		          if($3stelleAusgabe == 0){
+		        	  
 			          setTimeout(function(){
 			        	  $("#3stelle").children("#9").removeClass("rechts").addClass("links");
 			          }, 4000);
+			          
 		          }
 
 			  }
@@ -683,6 +730,8 @@ $( document ).ready(function() {
     	  setTimeout(function(){
     		  zehntausender();
     	  }, 7000);
+    	  
+		  }
 
     	  }
 	  	  // ENDE - TAUSENDER ZU ZEHNTAUSENDER //
@@ -693,6 +742,12 @@ $( document ).ready(function() {
 	  	  function zehntausender() {
 
     	  var zahl = $5stelle;
+    	  
+    	  if ($5stelleAusgabe == zahl && zahl != 0) {
+
+    		  $("#4stelle").children(".kugel").removeClass("rechts").addClass("links");
+			  
+		  } else {
 
     	  for (var i = 9; i >= 0; i--) {
 
@@ -704,6 +759,8 @@ $( document ).ready(function() {
 			  }
 
     	  }
+    	  
+		  }
 
     	  }
 	  	  // ENDE - ZEHNTAUSENDER //
@@ -712,7 +769,7 @@ $( document ).ready(function() {
       // ENDE - SUBTRAKTION //
 
     });
-
+    
     // ENDE - ADDITION UND SUBTRAKTION //
 
 
@@ -728,8 +785,10 @@ $( document ).ready(function() {
 
       //prüfen ob im Feld -/+ und eine Zahl und nichts anderes eingegeben wurde
       if(!$inhalt.match(/(^\s*[\-\+]\s*\d+)$/)){
+    	  
         $( "#rechne" ).prop("disabled",true);
-        alert("Bitte geben sie eine gültige Eingabe ein!")
+        alert("Bitte geben sie eine gültige Eingabe ein!");
+        
       }
 
       else {
@@ -743,16 +802,18 @@ $( document ).ready(function() {
           //prüfen  bei negativer Zahl
           if($vorzeichen == "-"){
 
-
-
             //prüfen ob vorhandene Zahl - einggebne Zahl > 0 ist
             if($ausgabe < $zahl){
+            	
               $( "#rechne" ).prop("disabled",true);
-              alert("Das Ergebnis der Rechnung darf nicht < 0 sein!")
+              alert("Das Ergebnis der Rechnung darf nicht < 0 sein!");
+              
             }
 
             else if($ausgabe >= $zahl){
+            	
               $( "#rechne" ).prop("disabled",false);
+              
             }
 
           }
@@ -763,12 +824,16 @@ $( document ).ready(function() {
 
             //prüfen ob die Rechnung über 99999 ergeben würde
             if(parseInt($ausgabe) + parseInt($zahl) > 99999){
+            	
               $( "#rechne" ).prop("disabled",true);
-              alert("Das Ergebnis darf den Wert 99999 nicht überschreiten!")
+              alert("Das Ergebnis darf den Wert 99999 nicht überschreiten!");
+              
             }
 
             else if($ausgabe + $zahl < 99999){
+            	
               $( "#rechne" ).prop("disabled",false);
+              
             }
 
           }
@@ -777,7 +842,7 @@ $( document ).ready(function() {
         }
 
     });
-
+    
     // ENDE - EINGABE PRÜFEN / AUSNAHMEBEHANDLUNG //
 
 });
